@@ -133,6 +133,28 @@
     }
     return ws.every(w => d._text.includes(w));
   }
+  // ---- relevance: title > creator > tags > description > category labels (ties keep the list order)
+  function score(d, ws) {
+    const q = ws.join(' ');
+    let s = 0;
+    for (const t of [d._tz, d._te]) {
+      if (!t) continue;
+      if (t === q) s += 200; else if (t.startsWith(q)) s += 120; else if (t.includes(q)) s += 80;
+    }
+    for (const w of ws) {
+      if (d._tz.includes(w) || d._te.includes(w)) {
+        // English words: prefer a whole-word start ("story" ranks Story Corner above History)
+        const ascii = /^[\x00-\x7f]+$/.test(w);
+        const re = ascii && new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+        s += !ascii || re.test(d._tz) || re.test(d._te) ? 40 : 25;
+      }
+      else if (d._cr.includes(w)) s += 20;
+      else if (d._tg.includes(w)) s += 15;
+      else if (d._ds.includes(w)) s += 10;
+      else s += 3; // matched only through topic / format / synonyms
+    }
+    return s;
+  }
 
   // ---- UI
   function applyLang() {
@@ -202,7 +224,8 @@
 
   function render() {
     const ws = words();
-    const hits = data.filter(d => matches(d, ws));
+    let hits = data.filter(d => matches(d, ws));
+    if (ws.length) hits = hits.map((d, i) => [score(d, ws), i, d]).sort((a, b) => b[0] - a[0] || a[1] - b[1]).map(x => x[2]);
     $('count').textContent = T[lang].count(hits.length);
     $('listTitle').textContent = filters.topic ? label(filters.topic) : T[lang].all;
     $('listCount').textContent = T[lang].items(hits.length);
@@ -307,6 +330,9 @@
     data = parseCSV(text).map(d => {
       GROUPS.forEach(g => { d[g.key] = split(d[g.key]); });
       d.title_zh = d.title_zh || d['\uFEFFtitle_zh'] || '';
+      const lc = v => (v || '').toLowerCase();
+      d._tz = lc(d.title_zh); d._te = lc(d.title_en); d._cr = lc(d.creator); d._tg = lc(d.tags);
+      d._ds = lc(d.desc_zh) + ' ' + lc(d.desc_en);
       d._text = [d.title_zh, d.title_en, d.creator, d.desc_zh, d.desc_en, d.tags, d.url,
         ...GROUPS.flatMap(g => d[g.key]), ...GROUPS.flatMap(g => d[g.key].map(v => (VALUE_KW[v] || '') + ' ' + (LABEL_OVERRIDE[v] ? LABEL_OVERRIDE[v].en : '')))].join(' ').toLowerCase();
       return d;
