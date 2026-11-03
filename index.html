@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DimSumChinese 點心中文 · 粵語學習資源庫</title>
+<meta name="description" content="為海外粵語家庭和所有想學廣東話的人整理的免費資源：兒歌、故事、粵拼、卡通、課程等。Free Cantonese learning resources for families and learners.">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="theme-color" content="#fb845e">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DimSumChinese 點心中文">
+<meta property="og:title" content="DimSumChinese 點心中文 · 免費粵語學習資源庫">
+<meta property="og:description" content="為海外粵語家庭和所有想學廣東話的人整理的免費資源：兒歌、故事、粵拼、卡通、課程等。Free Cantonese learning resources for families and learners.">
+<meta property="og:url" content="https://dimsumchinese.org/">
+<meta property="og:image" content="https://dimsumchinese.org/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://dimsumchinese.org/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-row">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="images/logo-trim.png" alt="" width="226" height="208">
+      <img class="brand-title" src="images/title-trim.png" alt="DimSumChinese 點心中文" width="936" height="129">
+    </a>
+    <nav class="nav">
+      <a class="active" href="index.html" data-zh="資源庫" data-en="Resources">資源庫</a>
+      <a href="support.html" data-zh="贊助" data-en="Support us">贊助</a>
+      <a href="#contact" data-zh="聯絡我們" data-en="Contact">聯絡我們</a>
+    </nav>
+    <div class="top-tools">
+      <button id="langBtn" class="lang-btn" type="button">EN</button>
+    </div>
+  </div>
+</header>
+<div class="banner" aria-hidden="true"></div>
+
+<main class="wrap">
+  <h1 data-zh="粵語學習資源庫" data-en="Cantonese Learning Resources">粵語學習資源庫</h1>
+  <p class="intro" data-zh="為海外粵語家庭和所有想學廣東話的人整理的免費資源。可按分類瀏覽，或按年齡、程度、技能和形式篩選，也可以用中文或英文搜尋。"
+     data-en="Free resources for Cantonese-speaking families abroad and anyone learning Cantonese. Browse by category, filter by age, difficulty, skill and format, or search in English or Chinese.">為海外粵語家庭和所有想學廣東話的人整理的免費資源。可按分類瀏覽，或按年齡、程度、技能和形式篩選，也可以用中文或英文搜尋。</p>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="分類 Categories">
+      <a class="donate-btn" href="support.html"><span aria-hidden="true">☕</span> <span data-zh="贊助網站運作" data-en="Support this site">贊助網站運作</span></a>
+      <a class="promo" href="#contact">
+        <b data-zh="推薦資源給我們" data-en="Suggest a resource">推薦資源給我們</b>
+        <span data-zh="一齊建立粵語資源庫 ↗" data-en="Help build this library ↗">一齊建立粵語資源庫 ↗</span>
+      </a>
+      <nav id="sidebar" class="cat-list"></nav>
+    </aside>
+    <div class="content">
+    <div class="search-wrap main-search">
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+        <input id="q" type="search" autocomplete="off" role="combobox" aria-controls="suggest" aria-expanded="false"
+          data-zh-ph="搜尋：兒歌、粵拼、恐龍…" data-en-ph="Search: songs, Jyutping, dinosaurs…" placeholder="搜尋：兒歌、粵拼、恐龍…">
+      </label>
+      <div id="suggest" class="suggest" role="listbox" hidden></div>
+    </div>
+    <section class="filter-box">
+      <div class="row">
+        <button id="allBtn" class="fbtn" type="button" data-zh="全部" data-en="All">全部</button>
+        <div id="groups" class="row inline"></div>
+      </div>
+      <div id="opts" class="row opts"></div>
+      <div id="active" class="row active"></div>
+      <div class="row foot">
+        <p id="count" class="count"></p>
+        <label class="adult-toggle"><input id="adultChk" type="checkbox">
+          <span data-zh="顯示 15+ 內容" data-en="Show 15+ content">顯示 15+ 內容</span></label>
+      </div>
+    </section>
+
+    <div class="list-head"><h2 id="listTitle"></h2><span id="listCount"></span></div>
+    <section id="list" class="grid" aria-live="polite"></section>
+    </div>
+  </div>
+
+  <section id="contact" class="contact">
+    <h2 data-zh="聯絡我們" data-en="Contact us">聯絡我們</h2>
+    <p class="intro" data-zh="想推薦新資源、回報失效連結，或者是原作者想更正、移除連結？歡迎留言。"
+       data-en="Want to suggest a resource, report a broken link, or are you a creator who wants a link corrected or removed? Send us a message.">想推薦新資源、回報失效連結，或者是原作者想更正、移除連結？歡迎留言。</p>
+    <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <!-- ▼ 把 Web3Forms 的 access key 貼在這裡 / paste your Web3Forms access key here -->
+      <input type="hidden" name="access_key" value="b1f27232-7b51-4a3d-9666-fdeb99970036">
+      <input type="hidden" name="subject" value="DimSumChinese 點心中文：網站新訊息">
+      <input type="hidden" name="from_name" value="DimSumChinese 網站">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+      <div class="f-row">
+        <label><span data-zh="名字" data-en="Name">名字</span>
+          <input name="name" required maxlength="100" autocomplete="name"></label>
+        <label><span data-zh="電郵" data-en="Email">電郵</span>
+          <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+      </div>
+      <label><span data-zh="類別" data-en="Topic">類別</span>
+        <select name="topic">
+          <option value="推薦新資源 Suggest a resource" data-zh="推薦新資源" data-en="Suggest a resource">推薦新資源</option>
+          <option value="回報失效連結 Broken link" data-zh="回報失效連結" data-en="Report a broken link">回報失效連結</option>
+          <option value="原作者：更正或移除 Creator request" data-zh="我是原作者：更正或移除" data-en="I'm a creator: correct or remove">我是原作者：更正或移除</option>
+          <option value="合作 Collaboration" data-zh="合作" data-en="Collaboration">合作</option>
+          <option value="其他 Other" data-zh="其他" data-en="Other">其他</option>
+        </select></label>
+      <label><span data-zh="訊息" data-en="Message">訊息</span>
+        <textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+      <button type="submit" class="send" data-zh="送出" data-en="Send">送出</button>
+      <p id="formStatus" class="form-status" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<footer id="about" class="footer">
+  <div class="wrap">
+    <p data-zh="本站只連結到原作者的公開頁面，所有內容版權屬原作者所有。"
+       data-en="We only link to creators' public pages; all content belongs to its original creators.">本站只連結到原作者的公開頁面，所有內容版權屬原作者所有。</p>
+    <p class="footer-support"><a href="support.html" data-zh="本站免費開放，如果覺得有用，歡迎請我們飲杯奶茶支持網站運作 ☕" data-en="This site is free. If you find it useful, buy us a milk tea to help keep it running ☕">本站免費開放，如果覺得有用，歡迎請我們飲杯奶茶支持網站運作 ☕</a></p>
+    <p class="footer-links"><a href="privacy.html" data-zh="私隱及免責聲明" data-en="Privacy & disclaimer">私隱及免責聲明</a></p>
+    <p><a href="mailto:dimsumchineseinfo@gmail.com">dimsumchineseinfo@gmail.com</a></p>
+  </div>
+</footer>
+<button id="toTop" class="to-top" type="button" aria-label="回到頂部 Back to top" data-zh-title="回到頂部" data-en-title="Back to top" title="回到頂部" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script src="app.js?v=14"></script>
+<script src="site.js?v=3"></script>
+<!-- GoatCounter 網站統計（本機打開時不會記錄） -->
+<script data-goatcounter="https://dimsumchinese.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
