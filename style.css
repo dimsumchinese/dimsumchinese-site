@@ -276,3 +276,10 @@ a{color:var(--accent-text)}
 .notfound{text-align:center;margin:56px auto 72px;max-width:560px}
 .notfound img{width:160px;height:auto}
 .notfound .btn{display:inline-block;margin-top:16px;background:var(--sel);color:var(--sel-ink);text-decoration:none;padding:10px 22px;border-radius:999px;font-weight:700}
+
+/* mailing-list opt-in */
+.optin{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:0;background:var(--card)}
+.optin legend{font-size:14px;color:var(--ink);padding:0 4px}
+.contact-form .optin label.radio{flex-direction:row;align-items:center;gap:8px;font-size:15px;color:var(--ink);margin:6px 0;cursor:pointer}
+.contact-form .optin input[type=radio]{width:18px;height:18px;accent-color:var(--sel);margin:0}
+.optin-note{margin:6px 0 0;font-size:13px;color:var(--muted)}

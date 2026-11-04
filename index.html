@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <header class="topbar">
@@ -113,6 +113,14 @@
         </select></label>
       <label><span data-zh="訊息" data-en="Message">訊息</span>
         <textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+      <fieldset class="optin">
+        <legend data-zh="想收到點心中文的最新消息嗎？例如新遊戲推出、新資源。" data-en="Would you like updates from DimSumChinese, such as new game launches and new resources?">想收到點心中文的最新消息嗎？例如新遊戲推出、新資源。</legend>
+        <label class="radio"><input type="radio" name="mailing_list" value="是 Yes">
+          <span data-zh="好，請加我入通訊名單" data-en="Yes, add me to the mailing list">好，請加我入通訊名單</span></label>
+        <label class="radio"><input type="radio" name="mailing_list" value="否 No" checked>
+          <span data-zh="不用了，謝謝" data-en="No, thank you">不用了，謝謝</span></label>
+        <p class="optin-note" data-zh="我們只會偶爾寄出重要消息，不會把你的電郵交給第三方，你可以隨時要求取消。" data-en="We only send occasional important news, never share your email, and you can unsubscribe at any time.">我們只會偶爾寄出重要消息，不會把你的電郵交給第三方，你可以隨時要求取消。</p>
+      </fieldset>
       <button type="submit" class="send" data-zh="送出" data-en="Send">送出</button>
       <p id="formStatus" class="form-status" role="status"></p>
     </form>
@@ -131,7 +139,7 @@
 <button id="toTop" class="to-top" type="button" aria-label="回到頂部 Back to top" data-zh-title="回到頂部" data-en-title="Back to top" title="回到頂部" hidden>
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
-<script src="app.js?v=15"></script>
+<script src="app.js?v=16"></script>
 <script src="site.js?v=3"></script>
 <!-- GoatCounter 網站統計（本機打開時不會記錄） -->
 <script data-goatcounter="https://dimsumchinese.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

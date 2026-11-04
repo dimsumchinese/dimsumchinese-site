@@ -371,7 +371,10 @@
     if (form.botcheck.checked) return; // spam bot
     const btn = form.querySelector('.send'); btn.disabled = true; show('sending');
     try {
-      const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      const fd = new FormData(form);
+      // Opt-in to the mailing list: mark the email subject so it is easy to filter in Gmail
+      if (/Yes/.test(fd.get('mailing_list') || '')) fd.set('subject', form.subject.value + '【加入通訊名單】');
+      const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
       const json = await res.json();
       if (!json.success) throw new Error(json.message);
       form.reset(); show('ok', 'ok');
