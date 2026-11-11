@@ -3,8 +3,8 @@
 // Filter columns (age, difficulty, skill, topic, format) can hold several values separated by ";".
 // The "tags" column holds your own extra search keywords, separated by spaces.
 (function () {
-  // First visit: follow the browser language (Chinese → 繁中, anything else → English). Afterwards remember the choice.
-  let lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en';
+  // First visit: always 繁中 (the site is for Cantonese families). Visitors can switch to EN; the choice is remembered.
+  let lang = 'zh';
   try { lang = localStorage.getItem('lang') || lang; } catch (e) {}
 
   const GROUPS = [
@@ -15,7 +15,7 @@
     { key: 'skill',      zh: '技能', en: 'Skill',
       order: ['聆聽 Listening', '觀看 Watching', '說話 Speaking', '閱讀 Reading', '書寫 Writing', '打字 Typing'] },
     { key: 'topic',      zh: '主題', en: 'Topic', sidebar: true,   // shown as the left category list
-      order: ['兒歌音樂 Songs & music', '故事 Stories', '卡通 Cartoons', '節日 Festivals', '認字詞彙 Reading & vocabulary',
+      order: ['卡通 Cartoons', '兒歌音樂 Songs & music', '故事 Stories', '節日 Festivals', '認字詞彙 Reading & vocabulary',
               '寫字打字 Writing & typing', '粵拼 Jyutping', '聲調發音 Pronunciation', '日常口語 Speaking', '語法 Grammar',
               '詩詞成語謎語 Poems & idioms', '生活 Daily life', '歷史文化 History & culture', '課程 Courses',
               '字典工具 Dictionaries & tools', '教學參考 For teachers', '綜合 General'] },
@@ -226,6 +226,12 @@
     const ws = words();
     let hits = data.filter(d => matches(d, ws));
     if (ws.length) hits = hits.map((d, i) => [score(d, ws), i, d]).sort((a, b) => b[0] - a[0] || a[1] - b[1]).map(x => x[2]);
+    // No search: list by category order (cartoons, songs, stories… first) so the first page is fun, not a course list
+    else {
+      const ord = GROUPS.find(g => g.key === 'topic').order;
+      const rank = d => Math.min(...d.topic.map(t => { const i = ord.indexOf(t); return i < 0 ? 99 : i; }), 99);
+      hits = hits.map((d, i) => [rank(d), i, d]).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map(x => x[2]);
+    }
     $('count').textContent = T[lang].count(hits.length);
     $('listTitle').textContent = filters.topic ? label(filters.topic) : T[lang].all;
     $('listCount').textContent = T[lang].items(hits.length);
