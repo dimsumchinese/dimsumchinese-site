@@ -26,7 +26,7 @@
 
   // ---- Language toggle on pages without app.js (support page)
   if (document.body.dataset.page) { // support / privacy / 404 pages
-    let lang = store.get('lang') || (/^zh/i.test(navigator.language || '') ? 'zh' : 'en');
+    let lang = store.get('lang') || 'zh';
     const btn = document.getElementById('langBtn');
     const apply = () => {
       document.documentElement.lang = lang === 'zh' ? 'zh-Hant-HK' : 'en';
